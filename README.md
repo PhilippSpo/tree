@@ -1,7 +1,7 @@
 ### Getting Started
 Add the package to your meteor project:
 
-    meteor add philippspo:
+    meteor add philippspo:tree
     
 Next you need a Mongo Collection that holds your tree nodes and follows this structure:
 ````javascript
