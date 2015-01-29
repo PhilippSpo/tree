@@ -1,3 +1,4 @@
+Demo here: http://planifica-tree.meteor.com/  
 ### Getting Started
 Add the package to your meteor project:
 
