@@ -5,12 +5,12 @@ Add the package to your meteor project:
     
 Next you need a Mongo Collection that holds your tree nodes and follows this structure:
 ````javascript
-    var node = {
-        _id: String,
-        title: String,
-        children: [String],
-        parent: null|String
-    }
+var node = {
+    _id: String,
+    title: String,
+    children: [String],
+    parent: null|String
+}
 ````
 Then you can add the tree as a template to your HTML:
 ````html
