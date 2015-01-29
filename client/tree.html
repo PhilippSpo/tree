@@ -1,39 +1,63 @@
-<template name="tree">
-	{{#each rootNodes}}
-		{{> treeNode context=this parentContext=.. padding=0}}
-	{{/each}}
+<template name="planificaTree">
+	{{#if rootNode}}
+		{{> treeNode context=rootNode root=true rootChilds=rootNodes parentContext=this}}
+	{{else}}
+		{{#each rootNodes}}
+			{{> treeNode context=this parentContext=.. padding=15}}
+		{{/each}}
+	{{/if}}
 </template>
 
 <template name="treeNode">
 	<div class="folder-with-children">
-		<!-- <a href="{{pathFor 'folder' folderId=_id}}"> -->
-		<div class="folder {{isSelectedFolder}}" style="padding-left: {{padding}}px;">
-			<div class="node-icon ion-folder"></div>
-			<div class="folder-item">
-				{{context.title}}
-			</div>
-			<!-- may be cut down to half size by css -->
-			<div class="connector-vert" style="left: {{padding}}px;">
-			</div>
-
-			<div class="connector-horiz" style="left: {{padding}}px;">
-			</div>
-			{{#if hasChildren}}
-				<div class="has-children-indicator">
-					<core-icon icon="expand-more"></core-icon>
+		<div>
+			<div id="{{#if root}}rootNode{{/if}}" class="folder {{#unless root}}pc-tree-node{{/unless}} {{isSelected}}" style="padding-left: {{padding}}px;">
+				<div class="folder-item">
+					<div class="node-icon">
+						<div class="{{icon}}"></div>
+					</div>
+					<div class="title">
+						{{context.title}}
+					</div>
 				</div>
-			{{/if}}
-		</div>
-		<!-- </a> -->
-		<core-collapse id="collapse-{{_id}}" duration="1.0" opened>
-			{{#each children}}
-				{{>treeNode context=this parentContext=../parentContext padding=padding}}
-			{{/each}}
-		</core-collapse>
+				{{#unless root}}
+					<!-- may be cut down to half size by css -->
+					<div class="connector-vert" style="left: {{padding}}px;">
+					</div>
 
-		{{#if isNotLastChild}}
-		<div class="connector-vert-parent" style="left: {{padding}}px;">
+					<div class="connector-horiz" style="left: {{padding}}px;">
+					</div>
+					{{#if hasChildren}}
+						<div class="dropdown-icon-wrapper">
+							<div class="dropdown-icon ion-chevron-down"></div>
+						</div>
+					{{/if}}
+				{{else}}
+					{{#if rootChilds}}
+						<div class="dropdown-icon-wrapper">
+							<div class="dropdown-icon ion-chevron-down"></div>
+						</div>
+					{{/if}}
+				{{/unless}}
+			</div>			
 		</div>
-		{{/if}}
+
+		{{#unless root}}
+			<div class="collapse {{childIsSelected}}">
+				{{#each children}}
+					{{>treeNode context=this parentContext=../parentContext padding=padding}}
+				{{/each}}
+			</div>
+			{{#unless context.isLast}}
+			<div class="connector-vert-parent" style="left: {{padding}}px;">
+			</div>
+			{{/unless}}
+		{{else}}
+			<div class="collapse {{childIsSelected}}">
+				{{#each rootChilds}}
+					{{>treeNode context=this parentContext=../parentContext padding=15}}
+				{{/each}}
+			</div>
+		{{/unless}}
 	</div>
 </template>

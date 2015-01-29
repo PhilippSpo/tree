@@ -15,18 +15,22 @@ Package.onUse(function(api) {
 
   // Client
   api.use(['templating'], 'client');
-  api.use("fourseven:scss@1.0.0", ["server"]);
+  api.use('mquandalle:stylus@1.0.9', 'client');
+  api.use("fourseven:scss@1.0.0", 'client');
   api.use('meteoric:ionicons-sass@0.1.5', 'client');
-  api.imply("fourseven:scss", ["server"]);
+  api.imply("fourseven:scss");
   api.imply('meteoric:ionicons-sass@0.1.5');
 
   // Client Files
   api.addFiles([
+    'client/PlanificaTree.js',
     'client/tree.html',
     'client/tree.js',
-    'client/tree.css',
-    'client/tree.scss'
+    'client/tree.scss',
+    'client/tree.styl'
     ], 'client');
+  
+  api.export("PlanificaTree");
 });
 
 Package.onTest(function(api) {
