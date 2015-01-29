@@ -1,4 +1,5 @@
 Demo here: http://planifica-tree.meteor.com/  
+Demo code here: https://github.com/PhilippSpo/tree-demo  
 ### Getting Started
 Add the package to your meteor project:
 
