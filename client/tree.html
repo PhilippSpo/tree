@@ -1,0 +1,39 @@
+<template name="tree">
+	{{#each rootNodes}}
+		{{> treeNode context=this parentContext=.. padding=0}}
+	{{/each}}
+</template>
+
+<template name="treeNode">
+	<div class="folder-with-children">
+		<!-- <a href="{{pathFor 'folder' folderId=_id}}"> -->
+		<div class="folder {{isSelectedFolder}}" style="padding-left: {{padding}}px;">
+			<div class="node-icon ion-folder"></div>
+			<div class="folder-item">
+				{{context.title}}
+			</div>
+			<!-- may be cut down to half size by css -->
+			<div class="connector-vert" style="left: {{padding}}px;">
+			</div>
+
+			<div class="connector-horiz" style="left: {{padding}}px;">
+			</div>
+			{{#if hasChildren}}
+				<div class="has-children-indicator">
+					<core-icon icon="expand-more"></core-icon>
+				</div>
+			{{/if}}
+		</div>
+		<!-- </a> -->
+		<core-collapse id="collapse-{{_id}}" duration="1.0" opened>
+			{{#each children}}
+				{{>treeNode context=this parentContext=../parentContext padding=padding}}
+			{{/each}}
+		</core-collapse>
+
+		{{#if isNotLastChild}}
+		<div class="connector-vert-parent" style="left: {{padding}}px;">
+		</div>
+		{{/if}}
+	</div>
+</template>
