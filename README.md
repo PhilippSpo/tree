@@ -5,6 +5,7 @@ Add the package to your meteor project:
 
     meteor add philippspo:tree
     
+In order to use the predefined icons you need to add ionicons to your meteor project (https://atmospherejs.com/meteoric/ionicons-sass).  
 Next you need a Mongo Collection that holds your tree nodes and follows this structure:
 ````javascript
 var node = {
@@ -88,8 +89,8 @@ If you reload the page after selecting a node, you will notice, that the tree au
 
 ### Icons
 For icons I chose ionicons (http://ionicons.com/).  
-The predefined icons are `ion-folder` and `ion-leaf` but you can change both.  
-At the moment icons are limited to all ionicons.
+You can change icons by setting classes that will be used for the nodes. You could also add a icon package like fontawesome and use the classes defined there.  
+The predefined icons are `ion-folder` and `ion-leaf` but you can change both to whatever icon you like.
 Example:
 ````javascript
 PlanificaTree.nodeIcon = 'ion-android-folder';
