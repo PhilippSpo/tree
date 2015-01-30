@@ -5,7 +5,7 @@ PlanificaTree = {
 	findParentsForNode: function(nodeId) {
 		this.selectedNodePath.push(nodeId);
 		var node = this.collection.findOne({_id: nodeId});
-		if(node.parent !== null){
+		if(node && node.parent !== null){
 			this.findParentsForNode(node.parent);
 		}
 	},
