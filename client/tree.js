@@ -4,7 +4,7 @@ Template.planificaTree.created = function () {
 	// tell our global tree object the parameters
 	_.extend(PlanificaTree, this.data);
 	if(data.routeParam){
-		nodeId = Router.current().params.nodeId;
+		nodeId = Router.current().params[data.routeParam];
 		if(nodeId){
 			PlanificaTree.selectedNodeId = nodeId;
 			PlanificaTree.findParentsForNode(nodeId);
