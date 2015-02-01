@@ -1,6 +1,9 @@
 PlanificaTree = {
 	nodeIcon: 'ion-folder',
+	nodeOpenIcon: 'ion-folder',
 	leafIcon: 'ion-leaf',
+	dropdownIcon: 'ion-chevron-down',
+	dropdownIconOpen: 'ion-chevron-up',
 	selectedNodePath: [],
 	findParentsForNode: function(nodeId) {
 		this.selectedNodePath.push(nodeId);

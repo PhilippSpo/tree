@@ -55,11 +55,12 @@ Template.treeNode.helpers({
 		return children;
 	},
 	icon: function() {
-		if(this.root){
-			return PlanificaTree.nodeIcon;
-		}
-		if(this.context.children.length > 0){
-			return PlanificaTree.nodeIcon;
+		if(this.root || this.context.children.length > 0){
+			if(childIsSelected.call(this) === true) {
+				return PlanificaTree.nodeOpenIcon;
+			}else{
+				return PlanificaTree.nodeIcon;
+			}
 		}else{
 			return PlanificaTree.leafIcon;
 		}
@@ -68,29 +69,48 @@ Template.treeNode.helpers({
 		return this.context.children.length > 0;
 	},
 	childIsSelected: function() {
-		var selChildInSubtree = false;
-		var children = [];
-
-		if(this.rootChilds){
-			this.rootChilds.forEach(function (child) {
-				children.push(child._id);
-			});
-			selChildInSubtree = PlanificaTree.selChildInSubtree(children);
-		}else{
-			selChildInSubtree = PlanificaTree.selChildInSubtree(this.context.children);
-		}
-		if(selChildInSubtree === true){
+		if(childIsSelected.call(this) === true){
 			return 'visible';
 		}
 	}
 });
+
+function childIsSelected() {
+	var selChildInSubtree = false;
+	var children = [];
+
+	if(this.rootChilds){
+		this.rootChilds.forEach(function (child) {
+			children.push(child._id);
+		});
+		selChildInSubtree = PlanificaTree.selChildInSubtree(children);
+	}else{
+		selChildInSubtree = PlanificaTree.selChildInSubtree(this.context.children);
+	}
+	if(selChildInSubtree === true){
+		return true;
+	}
+	return false;
+}
 
 Template.treeNode.events({
 	'click .dropdown-icon': function (e, template) {
 		e.preventDefault();
 		e.stopPropagation();
 		$(template.find('.collapse')).toggleClass('visible');
-		$(template.find('.dropdown-icon')).toggleClass('ion-chevron-down');
-		$(template.find('.dropdown-icon')).toggleClass('ion-chevron-up');
+		$(template.find('.dropdown-icon')).toggleClass(PlanificaTree.dropdownIcon);
+		$(template.find('.dropdown-icon')).toggleClass(PlanificaTree.dropdownIconOpen);
+
+		$(template.find('.node-icon')).toggleClass(PlanificaTree.nodeIcon);
+		$(template.find('.node-icon')).toggleClass(PlanificaTree.nodeOpenIcon);
+	}
+});
+
+Template.dropdownIcon.helpers({
+	dropdownIconClass: function() {
+		return PlanificaTree.dropdownIcon;
+	},
+	dropdownIconOpenClass: function() {
+		return PlanificaTree.dropdownIconOpen;
 	}
 });

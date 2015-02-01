@@ -13,8 +13,8 @@
 		<div>
 			<div id="{{#if root}}rootNode{{/if}}" class="folder {{#unless root}}pc-tree-node{{/unless}} {{isSelected}}" style="padding-left: {{padding}}px;">
 				<div class="folder-item">
-					<div class="node-icon">
-						<div class="{{icon}}"></div>
+					<div class="node-icon-wrapper">
+						<div class="node-icon {{icon}}"></div>
 					</div>
 					<div class="title">
 						{{context.title}}
@@ -61,9 +61,9 @@
 <template name="dropdownIcon">
 	<div class="dropdown-icon-wrapper">
 		{{#if selected}}
-			<div class="dropdown-icon ion-chevron-up"></div>
+			<div class="dropdown-icon {{dropdownIconOpenClass}}"></div>
 		{{else}}
-			<div class="dropdown-icon ion-chevron-down"></div>
+			<div class="dropdown-icon {{dropdownIconClass}}"></div>
 		{{/if}}
 	</div>
 </template>
