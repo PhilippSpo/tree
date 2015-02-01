@@ -28,15 +28,11 @@
 					<div class="connector-horiz" style="left: {{padding}}px;">
 					</div>
 					{{#if hasChildren}}
-						<div class="dropdown-icon-wrapper">
-							<div class="dropdown-icon ion-chevron-down"></div>
-						</div>
+						{{>dropdownIcon selected=childIsSelected}}
 					{{/if}}
 				{{else}}
 					{{#if rootChilds}}
-						<div class="dropdown-icon-wrapper">
-							<div class="dropdown-icon ion-chevron-down"></div>
-						</div>
+						{{>dropdownIcon}}
 					{{/if}}
 				{{/unless}}
 			</div>			
@@ -59,5 +55,15 @@
 				{{/each}}
 			</div>
 		{{/unless}}
+	</div>
+</template>
+
+<template name="dropdownIcon">
+	<div class="dropdown-icon-wrapper">
+		{{#if selected}}
+			<div class="dropdown-icon ion-chevron-up"></div>
+		{{else}}
+			<div class="dropdown-icon ion-chevron-down"></div>
+		{{/if}}
 	</div>
 </template>
